@@ -55,7 +55,6 @@
 #define IDC_CHECK43                     1047
 #define IDC_CHECK44                     1048
 #define IDC_CHECK45                     1049
-
 #define IDC_BUTT_SUDONG                 1071
 
 // Next default values for new objects

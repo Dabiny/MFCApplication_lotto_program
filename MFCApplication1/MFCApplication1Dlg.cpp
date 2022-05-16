@@ -209,15 +209,16 @@ void CMFCApplication1Dlg::OnBnClickedButtAuto() //자동버튼
 void CMFCApplication1Dlg::OnBnClickedButtSudong() //수동버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	int i, cnt = 0;
-	int arr[45] = {0 };
+	int cnt = 0;
+	int arr[45] = { 0 };
+	unsigned int a = 2;
 	BOOL chk;
 	CString s;
 	int random;
 	int temp;
 
 
-	for (i = 1; i < 46; i++)
+	for (int i = 1; i < 46; i++)
 	{
 		if (chk = IsDlgButtonChecked(IDC_CHECK1 + i-1))//check == TRUE
 		{
@@ -230,18 +231,39 @@ void CMFCApplication1Dlg::OnBnClickedButtSudong() //수동버튼
 	{
 		AfxMessageBox(L"버튼을 체크해주세요 !");
 	}
-
-	for (int j = 0; j < 6; j++)
+	else if (cnt > 0 && cnt < 6) //하나라도 체크했을 때
 	{
-		random = rand() % cnt;
+		for (int i = 0; i < 6 - cnt; i++)
+		{
+			random = rand() % 45;
 
-		temp = arr[j];
-		arr[j] = arr[random];
-		arr[random] = temp;
-
+			for (int j = 0; j < sizeof(arr); j++)
+			{
+				if (arr[j] == random) // 다시 돌리기 
+				{
+					random = rand() % 45;
+					
+				}
+				else
+				{
+					arr[cnt + i] = random;
+				}
+			}
+		}
 		s.Format(L"수동 선택 : %d  %d  %d  %d  %d  %d", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
-		//배열 무작위로 돌려서 출력?..
 	}
+
+	//for (int j = 0; j < 6; j++)
+	//{
+	//	random = rand() % cnt;
+
+	//	temp = arr[j];
+	//	arr[j] = arr[random];
+	//	arr[random] = temp;
+
+	//	s.Format(L"수동 선택 : %d  %d  %d  %d  %d  %d", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+	//	//배열 무작위로 돌려서 출력?..
+	//}
 	SetDlgItemText(IDC_STATIC_A, s);
 }
 
